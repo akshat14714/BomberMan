@@ -18,9 +18,9 @@ class Board:
                 if(i==0 or j==0 or i==boardSizey-2 or j==boardSizex-4 or ((i%4==0 and j%8==0) and (j<boardSizex-4 and i<boardSizey-2))):
                     wall.createWall(i,j,gBoard)
 
-    #brick.createBrick(gBoard)    
+    #brick.createBrick(gBoard)
 
-    def printBoard(self, gBoard, bomber, x, y, enemy, ex, ey):
+    def printBoard(self, gBoard, bomber, x, y, enemy):
         for i in range(boardSizey):
             for j in range(boardSizex):
                 if(bomber[i][j]=='B'):

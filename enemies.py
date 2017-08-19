@@ -6,7 +6,7 @@ class Enemy(Person):
     def __init__(self):
         self._test = 0
 
-    def makeEnemy(self, x, y, enemy, bomber, gBoard):
+    def makeEnemy(self, x, y, enemy, bomber, gBoard,ptr,enemy_arr):
             f = 0
             for i in range(x,x+2):
                 for j in range(y,y+4):
@@ -19,11 +19,15 @@ class Enemy(Person):
                 for i in range(x,x+2):
                     for j in range(y,y+4):
                         enemy[i][j] = 'E'
+                enemy_arr[ptr][0]=x
+                enemy_arr[ptr][1]=y
+                # arr[ptr][0]=x
+                # arr[ptr][1]=y
 
             else:
                 x = randint(1,20)*2
                 y = randint(1,20)*4
-                self.makeEnemy(x, y, enemy, bomber, gBoard)
+                self.makeEnemy(x, y, enemy, bomber, gBoard,ptr,enemy_arr)
 
     def moveRight(self, x, y, enemy):
         for i in range(y+4,y+8):

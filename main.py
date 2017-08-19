@@ -14,7 +14,8 @@ from alarmexception import *
 gBoard = [[' ' for i in range(boardSizex)] for j in range(boardSizey)]
 bomber = copy.deepcopy(gBoard)
 enemy = copy.deepcopy(gBoard)
-enemyp = [[0 for j in range(2)] for i in range(5)]
+
+enemy_arr = [[0 for i in range (0,10)] for j in range (0,10)]
 
 #for i in range(5):
 #    for j in range(2):
@@ -30,16 +31,17 @@ villan = Enemy()
 playerx = 2
 playery = 4
 
-enemyx = 0
-enemyy = 0
+# enemyx=0
+# enemyy=0
 
 board.makeWall(gBoard)
 brick.createBrick(gBoard)
 player.makePlayer(playerx, playery, bomber)
-enemyx = randint(1,20)*2
-enemyy = randint(1,20)*4
-villan.makeEnemy(enemyx, enemyy, enemy, bomber, gBoard)
-board.printBoard(gBoard, bomber, playerx, playery, enemy, enemyx, enemyy)
+for i in range(5):
+    enemy_arr[i][0] = randint(1,20)*2
+    enemy_arr[i][1] = randint(1,20)*4
+    enemy_arr.append(villan.makeEnemy(enemy_arr[i][0], enemy_arr[i][1],enemy,bomber, gBoard,i,enemy_arr))
+board.printBoard(gBoard, bomber, playerx, playery, enemy)
 
 def alarmHandler(signum, frame):
     raise AlarmException
@@ -58,7 +60,7 @@ def input_to(timeout=1):
 
 while(1):
     button = input_to()
-
+    #print(button)
     if(button == 'w'):
         if(player.checkUp(playerx, playery, gBoard) == 1):
             playerx = player.moveUp(playerx, playery, bomber)
@@ -79,24 +81,30 @@ while(1):
         print("END")
         sys.exit(0)
 
-    lis = ['a', 's', 'w', 'd']
-    enm = randint(0,3)
-    enemyMove = lis[enm]
+    for i in range(5):
+        lis = ['a', 's', 'w', 'd']
+        tmp=0
+        while tmp==0:
+            enm = randint(0,3)
+            enemyMove = lis[enm]
+            if(enemyMove == 'w'):
+                if(villan.checkUp(enemy_arr[i][0], enemy_arr[i][1], gBoard) == 1):
+                    enemy_arr[i][0] = villan.moveUp(enemy_arr[i][0], enemy_arr[i][1], enemy)
+                    tmp=1
 
-    if(enemyMove == 'w'):
-        if(villan.checkUp(enemyx, enemyy, gBoard) == 1):
-            enemyx = villan.moveUp(enemyx, enemyy, enemy)
+            elif(enemyMove == 's'):
+                if(villan.checkDown(enemy_arr[i][0], enemy_arr[i][1], gBoard) == 1):
+                    tmp=1
+                    enemy_arr[i][0] = villan.moveDown(enemy_arr[i][0], enemy_arr[i][1], enemy)
 
-    elif(enemyMove == 's'):
-        if(villan.checkDown(enemyx, enemyy, gBoard) == 1):
-            enemyx = villan.moveDown(enemyx, enemyy, enemy)
+            elif(enemyMove == 'a'):
+                if(villan.checkLeft(enemy_arr[i][0], enemy_arr[i][1], gBoard) == 1):
+                    tmp=1
+                    enemy_arr[i][1] = villan.moveLeft(enemy_arr[i][0], enemy_arr[i][1], enemy)
 
-    elif(enemyMove == 'a'):
-        if(villan.checkLeft(enemyx, enemyy, gBoard) == 1):
-            enemyy = villan.moveLeft(enemyx, enemyy, enemy)
+            elif(enemyMove == 'd'):
+                if(villan.checkRight(enemy_arr[i][0], enemy_arr[i][1], gBoard) == 1):
+                    tmp=1
+                    enemy_arr[i][1] = villan.moveRight(enemy_arr[i][0], enemy_arr[i][1], enemy)
 
-    elif(enemyMove == 'd'):
-        if(villan.checkRight(enemyx, enemyy, gBoard) == 1):
-            enemyy = villan.moveRight(enemyx, enemyy, enemy)
-
-    board.printBoard(gBoard, bomber, playerx, playery, enemy, enemyx, enemyy)
+    board.printBoard(gBoard, bomber, playerx, playery, enemy)

@@ -4,27 +4,27 @@ class Person:
 
     def checkRight(self, x, y, gBoard):
         for p in range(4):
-            if(gBoard[x][y+p+4]=='X' or gBoard[x+1][y+p+4]=='X' or gBoard[x][y+p+4]=='E' or gBoard[x][y+p+4]=='/' or gBoard[x+1][y+p+4]=='E' or gBoard[x][y+4+p]=='B' or gBoard[x+1][y+p+4]=='B' or gBoard[x+1][y+p+4]=='/'):
+            if(gBoard[x][y+p+4]=='X' or gBoard[x+1][y+p+4]=='X' or gBoard[x][y+p+4]=='E' or gBoard[x][y+p+4]=='/' or gBoard[x+1][y+p+4]=='E' or gBoard[x][y+4+p]=='B' or gBoard[x+1][y+p+4]=='B' or gBoard[x+1][y+p+4]=='/' or gBoard[x+1][y+p+4]!=' ' or gBoard[x][y+p+4]!=' '):
                 return 0
         return 1
 
     def checkLeft(self, x, y, gBoard):
         for p in range(4):
-            if(gBoard[x][y-p-1]=='X' or gBoard[x+1][y-p-1]=='X' or gBoard[x][y-p-1]=='E' or gBoard[x+1][y-p-1]=='E' or gBoard[x][y-p-1]=='B' or gBoard[x+1][y-p-1]=='B' or gBoard[x][y-p-1]=='/' or gBoard[x+1][y-p-1]=='/'):
+            if (gBoard[x][y-p-1]=='X' or gBoard[x+1][y-p-1]=='X' or gBoard[x][y-p-1]=='E' or gBoard[x+1][y-p-1]=='E' or gBoard[x][y-p-1]=='B' or gBoard[x+1][y-p-1]=='B' or gBoard[x][y-p-1]=='/' or gBoard[x+1][y-p-1]=='/' or gBoard[x][y-p-1]!=' ' or gBoard[x+1][y-p-1]!=' '):
                 return 0
         return 1
 
     def checkUp(self, x, y, gBoard):
         for p in range(2):
             for q in range(4):
-                if(gBoard[x-p-1][y+q]=='X' or gBoard[x-p-1][y+q]=='/' or gBoard[x-p-1][y+q]=='E' or gBoard[x-p-1][y+q]=='B'):
+                if (gBoard[x-p-1][y+q]=='X' or gBoard[x-p-1][y+q]=='/' or gBoard[x-p-1][y+q]=='E' or gBoard[x-p-1][y+q]=='B' or gBoard[x-p-1][y+q]!=' '):
                     return 0
         return 1
 
     def checkDown(self, x, y, gBoard):
         for p in range(2):
             for q in range(4):
-                if(gBoard[x+p+1][y+q]=='X' or gBoard[x+p+1][y+q]=='/' or gBoard[x+p+1][y+q]=='E' or gBoard[x+p+1][y+q]=='B'):
+                if (gBoard[x+p+1][y+q]=='X' or gBoard[x+p+1][y+q]=='/' or gBoard[x+p+1][y+q]=='E' or gBoard[x+p+1][y+q]=='B' or gBoard[x+p+1][y+q]!=' ':
                     return 0
         return 1
 
@@ -63,5 +63,3 @@ class Person:
             bomber[x+3][y+i] = 'B'
         x += 2
         return x
-
-    
