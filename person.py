@@ -24,7 +24,7 @@ class Person:
     def checkDown(self, x, y, gBoard):
         for p in range(2):
             for q in range(4):
-                if (gBoard[x+p+1][y+q]=='X' or gBoard[x+p+1][y+q]=='/' or gBoard[x+p+1][y+q]=='E' or gBoard[x+p+1][y+q]=='B' or gBoard[x+p+1][y+q]!=' ':
+                if (gBoard[x+p+1][y+q]=='X' or gBoard[x+p+1][y+q]=='/' or gBoard[x+p+1][y+q]=='E' or gBoard[x+p+1][y+q]=='B' or gBoard[x+p+1][y+q]!=' '):
                     return 0
         return 1
 
@@ -63,3 +63,8 @@ class Person:
             bomber[x+3][y+i] = 'B'
         x += 2
         return x
+
+    def remove(self, x, y, arr):
+        for i in range(x,x+2):
+            for j in range(y,y+4):
+                arr[i][j] = ' '
