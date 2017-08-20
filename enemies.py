@@ -4,6 +4,7 @@ from random import randint
 
 class Enemy(Person):
     def __init__(self):
+        self.life = 1
         self._test = 0
 
     def makeEnemy(self, x, y, enemy, bomber, gBoard,ptr,enemy_arr):

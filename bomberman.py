@@ -2,6 +2,8 @@ from person import *
 
 class BomberMan(Person):
     def __init__(self):
+        self.life = 3
+        self.score = 0
         self._test = 0
 
     def makePlayer(self, x, y, bomber):

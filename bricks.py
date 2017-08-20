@@ -15,3 +15,8 @@ class Brick:
                     gBoard[x][y+p] = "/"
                     gBoard[x+1][y+p] = "/"
                 counter += 1
+
+    def remove(self, x, y, gBoard):
+        for i in range(x,x+2):
+            for j in range(y,y+4):
+                gBoard[i][j] = ' '
