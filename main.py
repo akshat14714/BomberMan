@@ -63,6 +63,8 @@ count = 0
 effectfl = 0
 
 while(1):
+    n = 5
+
     print("Total Lives: " + str(player.life))
     print("Total Score: " + str(player.score))
     print("w->move up, s->move down, a->move left, d->move right")
@@ -71,8 +73,11 @@ while(1):
 
     if count==0:
         if(flag==1):
-            player.score = bombs.explode(bombx, bomby, gBoard, playerx, playery, bomber, enemy, player.score)
+            old_score = player.score
+            player.score = bombs.explode(bombx, bomby, gBoard, playerx, playery, bomber, enemy, player.score, enemy_arr)
             bombs.remove(bombx, bomby, gBoard)
+            if(player.score-old_score == 100):
+                n -= 1
             if(bomber[playerx][playery] == ' '):
                 player.life -= 1
                 playerx = 2
@@ -82,7 +87,7 @@ while(1):
         # count = 4
         flag = 0
 
-    if(player.life == 0):
+    if(player.life==0 or n==0):
         print("Game Over")
         sys.exit(0)
 
@@ -130,64 +135,66 @@ while(1):
     for i in range(5):
         lis = ['a', 's', 'w', 'd']
         tmp=0
-        while tmp==0:
-            enm = randint(0,3)
-            enemyMove = lis[enm]
-            if(enemyMove == 'w'):
-                if(villan.checkUp(enemy_arr[i][0], enemy_arr[i][1], gBoard) == 1):
-                    enemy_arr[i][0] = villan.moveUp(enemy_arr[i][0], enemy_arr[i][1], enemy)
-                    if(((enemy_arr[i][0]==playerx+2 or enemy_arr[i][0]==playerx-2) and (enemy_arr[i][1]==playery)) or ((enemy_arr[i][0]==playerx) and (enemy_arr[i][1]==playery-4 or enemy_arr[i][1]==playery+4))):
-                        print(playerx)
-                        print(playery)
-                        #player.remove(palyerx, playery, bomber)
-                        for k in range(playerx, playerx+2):
-                            for l in range(playery, playery+4):
-                                bomber[k][l] = ' '
-                        player.life -= 1
-                        playerx = 2
-                        playery = 4
-                        player.makePlayer(playerx, playery, bomber)
-                    tmp=1
+        if(enemy_arr[i][0]==-1 and enemy_arr[i][1]==-1):
+            continue
+        #while tmp==0:
+            #enm = randint(0,3)
+        enemyMove = randint(0,3)
+        if(enemyMove == 0):
+            if(villan.checkUp(enemy_arr[i][0], enemy_arr[i][1], gBoard) == 1):
+                enemy_arr[i][0] = villan.moveUp(enemy_arr[i][0], enemy_arr[i][1], enemy)
+                if(((enemy_arr[i][0]==playerx+2 or enemy_arr[i][0]==playerx-2) and (enemy_arr[i][1]==playery)) or ((enemy_arr[i][0]==playerx) and (enemy_arr[i][1]==playery-4 or enemy_arr[i][1]==playery+4))):
+                    print(playerx)
+                    print(playery)
+                    #player.remove(palyerx, playery, bomber)
+                    for k in range(playerx, playerx+2):
+                        for l in range(playery, playery+4):
+                            bomber[k][l] = ' '
+                    player.life -= 1
+                    playerx = 2
+                    playery = 4
+                    player.makePlayer(playerx, playery, bomber)
+                tmp=1
 
-            elif(enemyMove == 's'):
-                if(villan.checkDown(enemy_arr[i][0], enemy_arr[i][1], gBoard) == 1):
-                    tmp=1
-                    enemy_arr[i][0] = villan.moveDown(enemy_arr[i][0], enemy_arr[i][1], enemy)
-                    if(((enemy_arr[i][0]==playerx+2 or enemy_arr[i][0]==playerx-2) and (enemy_arr[i][1]==playery)) or ((enemy_arr[i][0]==playerx) and (enemy_arr[i][1]==playery-4 or enemy_arr[i][1]==playery+4))):
-                        #player.remove(palyerx, playery, bomber)
-                        for k in range(playerx, playerx+2):
-                            for l in range(playery, playery+4):
-                                bomber[k][l] = ' '
-                        player.life -= 1
-                        playerx = 2
-                        playery = 4
-                        player.makePlayer(playerx, playery, bomber)
+        elif(enemyMove == 1):
+            if(villan.checkDown(enemy_arr[i][0], enemy_arr[i][1], gBoard) == 1):
+                tmp=1
+                enemy_arr[i][0] = villan.moveDown(enemy_arr[i][0], enemy_arr[i][1], enemy)
+                if(((enemy_arr[i][0]==playerx+2 or enemy_arr[i][0]==playerx-2) and (enemy_arr[i][1]==playery)) or ((enemy_arr[i][0]==playerx) and (enemy_arr[i][1]==playery-4 or enemy_arr[i][1]==playery+4))):
+                    #player.remove(palyerx, playery, bomber)
+                    for k in range(playerx, playerx+2):
+                        for l in range(playery, playery+4):
+                            bomber[k][l] = ' '
+                    player.life -= 1
+                    playerx = 2
+                    playery = 4
+                    player.makePlayer(playerx, playery, bomber)
 
-            elif(enemyMove == 'a'):
-                if(villan.checkLeft(enemy_arr[i][0], enemy_arr[i][1], gBoard) == 1):
-                    tmp=1
-                    enemy_arr[i][1] = villan.moveLeft(enemy_arr[i][0], enemy_arr[i][1], enemy)
-                    if(((enemy_arr[i][0]==playerx+2 or enemy_arr[i][0]==playerx-2) and (enemy_arr[i][1]==playery)) or ((enemy_arr[i][0]==playerx) and (enemy_arr[i][1]==playery-4 or enemy_arr[i][1]==playery+4))):
-                        for k in range(playerx, playerx+2):
-                            for l in range(playery, playery+4):
-                                bomber[k][l] = ' '
-                        player.life -= 1
-                        playerx = 2
-                        playery = 4
-                        player.makePlayer(playerx, playery, bomber)
+        elif(enemyMove == 2):
+            if(villan.checkLeft(enemy_arr[i][0], enemy_arr[i][1], gBoard) == 1):
+                tmp=1
+                enemy_arr[i][1] = villan.moveLeft(enemy_arr[i][0], enemy_arr[i][1], enemy)
+                if(((enemy_arr[i][0]==playerx+2 or enemy_arr[i][0]==playerx-2) and (enemy_arr[i][1]==playery)) or ((enemy_arr[i][0]==playerx) and (enemy_arr[i][1]==playery-4 or enemy_arr[i][1]==playery+4))):
+                    for k in range(playerx, playerx+2):
+                        for l in range(playery, playery+4):
+                            bomber[k][l] = ' '
+                    player.life -= 1
+                    playerx = 2
+                    playery = 4
+                    player.makePlayer(playerx, playery, bomber)
 
-            elif(enemyMove == 'd'):
-                if(villan.checkRight(enemy_arr[i][0], enemy_arr[i][1], gBoard) == 1):
-                    tmp=1
-                    enemy_arr[i][1] = villan.moveRight(enemy_arr[i][0], enemy_arr[i][1], enemy)
-                    if(((enemy_arr[i][0]==playerx+2 or enemy_arr[i][0]==playerx-2) and (enemy_arr[i][1]==playery)) or ((enemy_arr[i][0]==playerx) and (enemy_arr[i][1]==playery-4 or enemy_arr[i][1]==playery+4))):
-                        #player.remove(palyerx, playery, bomber)
-                        for k in range(playerx, playerx+2):
-                            for l in range(playery, playery+4):
-                                bomber[k][l] = ' '
-                        player.life -= 1
-                        playerx = 2
-                        playery = 4
-                        player.makePlayer(playerx, playery, bomber)
+        elif(enemyMove == 3):
+            if(villan.checkRight(enemy_arr[i][0], enemy_arr[i][1], gBoard) == 1):
+                tmp=1
+                enemy_arr[i][1] = villan.moveRight(enemy_arr[i][0], enemy_arr[i][1], enemy)
+                if(((enemy_arr[i][0]==playerx+2 or enemy_arr[i][0]==playerx-2) and (enemy_arr[i][1]==playery)) or ((enemy_arr[i][0]==playerx) and (enemy_arr[i][1]==playery-4 or enemy_arr[i][1]==playery+4))):
+                    #player.remove(palyerx, playery, bomber)
+                    for k in range(playerx, playerx+2):
+                        for l in range(playery, playery+4):
+                            bomber[k][l] = ' '
+                    player.life -= 1
+                    playerx = 2
+                    playery = 4
+                    player.makePlayer(playerx, playery, bomber)
 
     os.system("clear")

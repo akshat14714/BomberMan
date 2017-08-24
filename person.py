@@ -24,7 +24,7 @@ class Person:
     def checkDown(self, x, y, gBoard):
         for p in range(2):
             for q in range(4):
-                if (gBoard[x+p+1][y+q]=='X' or gBoard[x+p+1][y+q]=='/' or gBoard[x+p+1][y+q]=='E' or gBoard[x+p+1][y+q]=='B'):
+                if (gBoard[x+p+2][y+q]=='X' or gBoard[x+p+2][y+q]=='/' or gBoard[x+p+2][y+q]=='E' or gBoard[x+p+2][y+q]=='B'):
                     return 0
         return 1
 

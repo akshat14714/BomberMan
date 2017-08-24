@@ -7,7 +7,7 @@ class Bomb:
             for j in range(y,y+4):
                 gBoard[i][j] = count
 
-    def explode(self, x, y, gBoard, playerx, playery, bomber, enemy, score):
+    def explode(self, x, y, gBoard, playerx, playery, bomber, enemy, score, enemy_arr):
         flag = 0
         for i in range(x,x+2):
             for j in range(y-4,y):
@@ -16,6 +16,12 @@ class Bomb:
                         bomber[i][j] = ' '
                     if(enemy[i][j]=='E'):
                         enemy[i][j] = ' '
+                        for k in range(5):
+                            if(enemy_arr[k][0]==i and enemy_arr[k][1]==j):
+                                enemy_arr[k][0] = -1
+                                enemy_arr[k][1] = -1
+                                flag = 1
+                                break
                         flag = 1
                     if(gBoard[i][j] == '/'):
                         flag = 2
@@ -26,6 +32,13 @@ class Bomb:
                         bomber[i][j] = ' '
                     if(enemy[i][j]=='E'):
                         enemy[i][j] = ' '
+                        for k in range(5):
+                            if(enemy_arr[k][0]==i and enemy_arr[k][1]==j):
+                                enemy_arr[k][0] = -1
+                                enemy_arr[k][1] = -1
+                                #enemy_arr.remove(k)
+                                flag = 1
+                                break
                         flas = 1
                     if(gBoard[i][j] == '/'):
                         flag = 2
@@ -37,6 +50,12 @@ class Bomb:
                         bomber[i][j] = ' '
                     if(enemy[i][j]=='E'):
                         enemy[i][j] = ' '
+                        for k in range(5):
+                            if(enemy_arr[k][0]==i and enemy_arr[k][1]==j):
+                                enemy_arr[k][0] = -1
+                                enemy_arr[k][1] = -1
+                                flag = 1
+                                break
                         flag = 1
                     if(gBoard[i][j] == '/'):
                         flag = 2
@@ -48,12 +67,18 @@ class Bomb:
                         bomber[i][j] = ' '
                     if(enemy[i][j]=='E'):
                         enemy[i][j] = ' '
-                        flag = 1
+                        for k in range(5):
+                            if(enemy_arr[k][0]==i and enemy_arr[k][1]==j):
+                                enemy_arr[k][0] = -1
+                                enemy_arr[k][1] = -1
+                                flag = 1
+                                break
                     if(gBoard[i][j] == '/'):
                         flag = 2
                     gBoard[i][j] = 'v'
         if(flag==1):
             score += 100
+            #n -= 1
         elif(flag==2):
             score += 20
         return score
