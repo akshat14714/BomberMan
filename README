@@ -1,0 +1,21 @@
+This BomberMan game is built by Akshat Maheshwari.
+Roll No. : 20161024
+
+This game is a terminal based game.
+Use the command "python main.py" on the terinal to play the game.
+
+Controls:
+	w : To move the bomberman upwards
+	s : To move the bomberman down
+	a : To move the bomberman left
+	d : To move the bomberman right
+	b : To plant the bomb at the position where the bomberman is currently standing
+	q : To quit the game
+
+Features:
+	1. The game is to be played according to the specified controls.
+	2. The game will automatically get over as you kill all the enemies, you win the game at this point.
+	3. Plant only one bomb at a time. Plant another bomb only after the previous has completely exploded.
+	4. Killing an enemy gives you 100 points, whereas breaking a brick gives you 20 points.
+	5. The entity at the position where the bomb is planted will not get affected by the explosion of the bomb. The effect of the explosion is seen only in the surrounding 4 cells.
+	
