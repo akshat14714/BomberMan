@@ -1,4 +1,5 @@
 from __future__ import print_function
+from termcolor import colored
 from bricks import *
 from walls import *
 
@@ -29,9 +30,13 @@ class Board:
                     bombx = 0
                     bomby = 0
                 if(bomber[i][j]=='B'):
-                    print(bomber[i][j], end='')
+                    print(colored(bomber[i][j], 'cyan'), end='')
                 elif(enemy[i][j]=='E'):
-                    print(enemy[i][j], end='')
+                    print(colored(enemy[i][j], 'red'), end='')
+                elif(gBoard[i][j]=='/'):
+                    print(colored(gBoard[i][j], 'yellow'), end='')
+                elif(gBoard[i][j]=='v' or gBoard[i][j]=='^' or gBoard[i][j]=='>' or gBoard[i][j]=='<'):
+                    print(colored(gBoard[i][j], 'magenta'), end='')
                 else:
-                    print (gBoard[i][j], end='')
+                    print(gBoard[i][j], end='')
             print()

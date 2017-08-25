@@ -61,6 +61,8 @@ def input_to(timeout=1):
 flag = 0
 count = 0
 effectfl = 0
+enemyDeath = 0
+enemyDie = [0 for i in range(5)]
 
 while(1):
     n = 5
@@ -129,13 +131,20 @@ while(1):
             playery = player.moveRight(playerx, playery, bomber)
 
     elif(button == 'q'):
-        print("END")
+        print("Good Bye")
         sys.exit(0)
 
     for i in range(5):
         lis = ['a', 's', 'w', 'd']
         tmp=0
         if(enemy_arr[i][0]==-1 and enemy_arr[i][1]==-1):
+            if(enemyDie[i] == 0):
+                enemyDie[i] += 1
+                enemyDeath += 1
+            if(enemyDeath == 5):
+                print('You killed all the enemies')
+                print('You win')
+                sys.exit(0)
             continue
         #while tmp==0:
             #enm = randint(0,3)
