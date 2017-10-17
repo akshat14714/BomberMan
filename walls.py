@@ -1,18 +1,21 @@
+#!/usr/bin/env python
+""" This method is for walls on board """
+
 from __future__ import print_function
-from bricks import *
+from bricks import Brick
 
-brick = Brick()
-
-boardSizey = 42
-boardSizex = 84
+BRICK = Brick()
 
 
-class Walls:
+class Walls(object):
 
+    """ This init for encapsulation """
     def __init__(self):
-        self._struct = [[' ' for i in range(4)] for j in range(2)]
+        self.size = 4
+        self._struct = [[' ' for _ in range(4)] for _ in range(2)]
 
-    def createWall(self, x, y, gBoard):
-        for p in range(4):
-            gBoard[x][y + p] = "X"
-            gBoard[x + 1][y + p] = "X"
+    def create_wall(self, xcord, ycord, g_board):
+        """ This method to create walls """
+        for i in range(self.size):
+            g_board[xcord][ycord + i] = "X"
+            g_board[xcord + 1][ycord + i] = "X"

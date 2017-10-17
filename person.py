@@ -1,90 +1,104 @@
-class Person:
+#!/usr/bin/env python
+""" This method is for moving objects on board """
 
+class Person(object):
+
+    """ This init for encapsulation """
     def __init__(self):
         self._test = 0
+        self.size = 4
 
-    def checkRight(self, x, y, gBoard):
-        for p in range(4):
-            if(gBoard[x][y + p + 4] == 'X' or
-               gBoard[x + 1][y + p + 4] == 'X' or
-               gBoard[x][y + p + 4] == 'E' or gBoard[x][y + p + 4] == '/' or
-               gBoard[x + 1][y + p + 4] == 'E' or
-               gBoard[x][y + 4 + p] == 'B' or
-               gBoard[x + 1][y + p + 4] == 'B' or
-               gBoard[x + 1][y + p + 4] == '/'):
+    def check_right(self, xcord, ycord, g_board):
+        """ Method to check for right movement """
+        for _ in range(self.size):
+            if(g_board[xcord][ycord + _ + 4] == 'X' or
+               g_board[xcord + 1][ycord + _ + 4] == 'X' or
+               g_board[xcord][ycord + _ + 4] == 'E' or g_board[xcord][ycord + _ + 4] == '/' or
+               g_board[xcord + 1][ycord + _ + 4] == 'E' or
+               g_board[xcord][ycord + 4 + _] == 'B' or
+               g_board[xcord + 1][ycord + _ + 4] == 'B' or
+               g_board[xcord + 1][ycord + _ + 4] == '/'):
                 return 0
         return 1
 
-    def checkLeft(self, x, y, gBoard):
-        for p in range(4):
-            if(gBoard[x][y - p - 1] == 'X' or
-               gBoard[x + 1][y - p - 1] == 'X' or
-               gBoard[x][y - p - 1] == 'E' or
-               gBoard[x + 1][y - p - 1] == 'E' or
-               gBoard[x][y - p - 1] == 'B' or
-               gBoard[x + 1][y - p - 1] == 'B' or
-               gBoard[x][y - p - 1] == '/' or
-               gBoard[x + 1][y - p - 1] == '/'):
+    def check_left(self, xcord, ycord, g_board):
+        """ Method to check for left movement """
+        for _ in range(self.size):
+            if(g_board[xcord][ycord - _ - 1] == 'X' or
+               g_board[xcord + 1][ycord - _ - 1] == 'X' or
+               g_board[xcord][ycord - _ - 1] == 'E' or
+               g_board[xcord + 1][ycord - _ - 1] == 'E' or
+               g_board[xcord][ycord - _ - 1] == 'B' or
+               g_board[xcord + 1][ycord - _ - 1] == 'B' or
+               g_board[xcord][ycord - _ - 1] == '/' or
+               g_board[xcord + 1][ycord - _ - 1] == '/'):
                 return 0
         return 1
 
-    def checkUp(self, x, y, gBoard):
-        for p in range(2):
-            for q in range(4):
-                if(gBoard[x - p - 1][y + q] == 'X' or
-                   gBoard[x - p - 1][y + q] == '/' or
-                   gBoard[x - p - 1][y + q] == 'E' or
-                   gBoard[x - p - 1][y + q] == 'B'):
+    def check_up(self, xcord, ycord, g_board):
+        """ Method to check for upward movement """
+        for p_e in range(2):
+            for q_e in range(self.size):
+                if(g_board[xcord - p_e - 1][ycord + q_e] == 'X' or
+                   g_board[xcord - p_e - 1][ycord + q_e] == '/' or
+                   g_board[xcord - p_e - 1][ycord + q_e] == 'E' or
+                   g_board[xcord - p_e - 1][ycord + q_e] == 'B'):
                     return 0
         return 1
 
-    def checkDown(self, x, y, gBoard):
-        for p in range(2):
-            for q in range(4):
-                if(gBoard[x + p + 2][y + q] == 'X' or
-                   gBoard[x + p + 2][y + q] == '/' or
-                   gBoard[x + p + 2][y + q] == 'E' or
-                   gBoard[x + p + 2][y + q] == 'B'):
+    def check_down(self, xcord, ycord, g_board):
+        """ Method to check for downward movement """
+        for p_e in range(2):
+            for q_e in range(self.size):
+                if(g_board[xcord + p_e + 2][ycord + q_e] == 'X' or
+                   g_board[xcord + p_e + 2][ycord + q_e] == '/' or
+                   g_board[xcord + p_e + 2][ycord + q_e] == 'E' or
+                   g_board[xcord + p_e + 2][ycord + q_e] == 'B'):
                     return 0
         return 1
 
-    def moveRight(self, x, y, bomber):
-        for i in range(y + 4, y + 8):
-            bomber[x][i] = 'B'
-            bomber[x][i - 4] = ' '
-            bomber[x + 1][i] = 'B'
-            bomber[x + 1][i - 4] = ' '
-        y += 4
-        return y
+    def move_right(self, xcord, ycord, bomber):
+        """ Method to move right """
+        for i in range(ycord + self.size, ycord + 8):
+            bomber[xcord][i] = 'B'
+            bomber[xcord][i - 4] = ' '
+            bomber[xcord + 1][i] = 'B'
+            bomber[xcord + 1][i - 4] = ' '
+        ycord += 4
+        return ycord
 
-    def moveLeft(self, x, y, bomber):
-        for i in range(y - 4, y):
-            bomber[x][i] = 'B'
-            bomber[x][i + 4] = ' '
-            bomber[x + 1][i] = 'B'
-            bomber[x + 1][i + 4] = ' '
-        y -= 4
-        return y
+    def move_left(self, xcord, ycord, bomber):
+        """ Method to move left """
+        for i in range(ycord - self.size, ycord):
+            bomber[xcord][i] = 'B'
+            bomber[xcord][i + 4] = ' '
+            bomber[xcord + 1][i] = 'B'
+            bomber[xcord + 1][i + 4] = ' '
+        ycord -= 4
+        return ycord
 
-    def moveUp(self, x, y, bomber):
-        for i in range(4):
-            bomber[x - 2][y + i] = 'B'
-            bomber[x - 1][y + i] = 'B'
-            bomber[x][y + i] = ' '
-            bomber[x + 1][y + i] = ' '
-        x -= 2
-        return x
+    def move_up(self, xcord, ycord, bomber):
+        """ Method to move up """
+        for i in range(self.size):
+            bomber[xcord - 2][ycord + i] = 'B'
+            bomber[xcord - 1][ycord + i] = 'B'
+            bomber[xcord][ycord + i] = ' '
+            bomber[xcord + 1][ycord + i] = ' '
+        xcord -= 2
+        return xcord
 
-    def moveDown(self, x, y, bomber):
-        for i in range(4):
-            bomber[x][y + i] = ' '
-            bomber[x + 1][y + i] = ' '
-            bomber[x + 2][y + i] = 'B'
-            bomber[x + 3][y + i] = 'B'
-        x += 2
-        return x
+    def move_down(self, xcord, ycord, bomber):
+        """ Method to move down """
+        for i in range(self.size):
+            bomber[xcord][ycord + i] = ' '
+            bomber[xcord + 1][ycord + i] = ' '
+            bomber[xcord + 2][ycord + i] = 'B'
+            bomber[xcord + 3][ycord + i] = 'B'
+        xcord += 2
+        return xcord
 
-    def remove(self, x, y, arr):
-        for i in range(x, x + 2):
-            for j in range(y, y + 4):
+    def remove(self, xcord, ycord, arr):
+        """ Method for removal of any person """
+        for i in range(xcord, xcord + 2):
+            for j in range(ycord, ycord + self.size):
                 arr[i][j] = ' '

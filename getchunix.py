@@ -1,13 +1,17 @@
+#!/usr/bin/env python
+""" This file is just to handle uninterrupted keyboard inputs """
+
 from __future__ import print_function
-import signal
-import copy
-import sys
-import time
-from random import randint
+# import copy
+# import signal
+# import sys
+# import time
+# from random import randint
 
 
-class GetchUnix:
+class GetchUnix(object):
 
+    """ This is init for encapsulation """
     def __init__(self):
         import tty
 
@@ -15,11 +19,11 @@ class GetchUnix:
         import sys
         import tty
         import termios
-        fd = sys.stdin.fileno()
-        old_settings = termios.tcgetattr(fd)
+        f_d = sys.stdin.fileno()
+        old_settings = termios.tcgetattr(f_d)
         try:
             tty.setraw(sys.stdin.fileno())
-            ch = sys.stdin.read(1)
+            c_h = sys.stdin.read(1)
         finally:
-            termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
-        return ch
+            termios.tcsetattr(f_d, termios.TCSADRAIN, old_settings)
+        return c_h

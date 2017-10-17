@@ -1,50 +1,55 @@
+#!/usr/bin/env python
+""" This class is for the main board for game """
+
 from __future__ import print_function
 from termcolor import colored
-from bricks import *
-from walls import *
+# from bricks import Brick
+from walls import Walls
 
-boardSizex = 84
-boardSizey = 42
-
-wall = Walls()
-brick = Brick()
+# wall = Walls()
+# brick = Brick()
 
 
-class Board:
+class Board(object):
 
+    """ This init is just for encapsulation """
     def __init__(self):
+        self.sizex = 84
+        self.sizey = 42
         self._test = 0
 
-    def makeWall(self, gBoard):
-        for i in range(0, boardSizey, 2):
-            for j in range(0, boardSizex, 4):
-                if(i == 0 or j == 0 or i == boardSizey - 2 or
-                   j == boardSizex - 4 or
+    def make_wall(self, g_board):
+        """ This method creates walls on the borad """
+        for i in range(0, self.sizey, 2):
+            for j in range(0, self.sizex, 4):
+                if(i == 0 or j == 0 or i == 42 - 2 or
+                   j == 84 - 4 or
                    (i % 4 == 0 and j % 8 == 0 and
-                        j < boardSizex - 4 and i < boardSizey - 2)):
-                    wall.createWall(i, j, gBoard)
+                    j < 84 - 4 and i < 42 - 2)):
+                    Walls().create_wall(i, j, g_board)
 
-    def printBoard(self, gBoard, bomber, x, y, enemy, count, bombx, bomby):
-        for i in range(boardSizey):
-            for j in range(boardSizex):
-                if(i == bombx and j == bomby and gBoard[i][j] != 'X' and
-                   gBoard[i][j] != '/'):
+    def print_board(self, g_board, bomber, enemy, count, bombx, bomby):
+        """ This method prints the main board for the game """
+        for i in range(self.sizey):
+            for j in range(self.sizex):
+                if(i == bombx and j == bomby and g_board[i][j] != 'X' and
+                   g_board[i][j] != '/'):
                     for k in range(i, i + 2):
-                        for l in range(j, j + 4):
-                            if(count != 0):
-                                gBoard[k][l] = count
+                        for _ in range(j, j + 4):
+                            if count != 0:
+                                g_board[k][_] = count
                     bombx = 0
                     bomby = 0
-                if(bomber[i][j] == 'B'):
+                if bomber[i][j] == 'B':
                     print(colored(bomber[i][j], 'cyan'), end='')
-                elif(enemy[i][j] == 'E'):
+                elif enemy[i][j] == 'E':
                     print(colored(enemy[i][j], 'red'), end='')
-                elif(gBoard[i][j] == '/'):
-                    print(colored(gBoard[i][j], 'yellow'), end='')
-                elif(gBoard[i][j] == 'v' or gBoard[i][j] == '^' or
-                     gBoard[i][j] == '>' or gBoard[i][j] == '<' or
-                     gBoard[i][j] == count):
-                    print(colored(gBoard[i][j], 'magenta'), end='')
+                elif g_board[i][j] == '/':
+                    print(colored(g_board[i][j], 'yellow'), end='')
+                elif(g_board[i][j] == 'v' or g_board[i][j] == '^' or
+                     g_board[i][j] == '>' or g_board[i][j] == '<' or
+                     g_board[i][j] == count):
+                    print(colored(g_board[i][j], 'magenta'), end='')
                 else:
-                    print(gBoard[i][j], end='')
+                    print(g_board[i][j], end='')
             print()

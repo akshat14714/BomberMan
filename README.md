@@ -1,1 +1,1 @@
-# BomberMan-Game
+# BOMBERMAN Game
