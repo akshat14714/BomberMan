@@ -16,7 +16,7 @@ Use the command ```python main.py``` or ```python3 main.py``` on the terinal to 
 	q : To quit the game
 ```
 
-Features:
+### Features:
 	1. The game consists of 1 bomberman and 5 enemies (number of enemies is fixed).
 	2. The aim of the game is to kill all the enemies and score as high as possible.
 	3. The game is to be played according to the specified controls.
@@ -27,14 +27,14 @@ Features:
 	9. The bomberman has 3 lives to play(also fixed).
 	10. The game quits, if the bomberman dies or you press 'q' or all the enemies get killed.
 
-Symbols:
+### Symbols:
 	Walls : X
 	Bricks : /
 	Bomberman : B
 	Enemy : E
 	Explosion : Pattern using '^', 'v', '>' and '<'
 
-Features Implemented:
+### Features Implemented:
 	1. Inheritence : There is good use of inheritence. Enemy as well as Bomberman inherit their movement functions from the Person class. There are also other instances of inheritence being used.
 
 	2. Ploymorphism : The use of polymorphism has been done at various points of the complete code.
@@ -43,6 +43,6 @@ Features Implemented:
 
 	4. Encapsulation
 
-Bonus Things:
+### Bonus Things:
 	1. The explosion is shown with a pattern.
 	2. The different entities have been given different colors.
