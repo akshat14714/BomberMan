@@ -1,16 +1,20 @@
-This BomberMan game is built by Akshat Maheshwari.
+This BomberMan game is built by **Akshat Maheshwari**.
+
 Roll No. : 20161024
 
 This game is a terminal based game.
-Use the command "python main.py" or "python3 main.py" on the terinal to play the game.
 
-Controls:
+Use the command ```python main.py``` or ```python3 main.py``` on the terinal to play the game.
+
+### Controls:
+```
 	w : To move the bomberman upwards
 	s : To move the bomberman down
 	a : To move the bomberman left
 	d : To move the bomberman right
 	b : To plant the bomb at the position where the bomberman is currently standing
 	q : To quit the game
+```
 
 Features:
 	1. The game consists of 1 bomberman and 5 enemies (number of enemies is fixed).
